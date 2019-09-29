@@ -8,6 +8,7 @@ import (
 	"math"
 	"image/png"
 	"crypto/md5"
+	"path/filepath"
 )
 
 func WriteWithIoutil(name string,content string,append int) {
@@ -76,4 +77,20 @@ func ImageCut(sourceName string,targetName string,x1 int,y1 int,x2 int,y2 int){
 	subImg := rgbImg.SubImage(image.Rect(x1, y1, x2, y2)).(*image.NRGBA) //图片裁剪x0 y0 x1 y1
 	png.Encode(dist, subImg)       //写入文件
 	
+}
+
+
+/**
+*@desc 获取当前脚本执行路径
+**/
+func GetExecutePath() string {
+	dir, err := os.Executable()
+	if err != nil {
+		fmt.Println(err)
+	}
+ 
+	exPath := filepath.Dir(dir)
+	fmt.Println(exPath)
+ 
+	return exPath
 }
